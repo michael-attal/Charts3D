@@ -1,0 +1,303 @@
+{
+  "activityEntities" : [
+    "trainingStarted",
+    [
+      {
+        "createdDate" : "2025-07-09T12:21:04Z",
+        "event" : "trainingStarted",
+        "id" : "3993C67C-8AD3-41A7-9333-BB5B7313AA6B",
+        "subtitle" : "PenguinWeightRegressor 1",
+        "title" : "Training Started"
+      }
+    ],
+    "trainingDataAdded",
+    [
+      {
+        "createdDate" : "2025-07-09T12:20:11Z",
+        "event" : "trainingDataAdded",
+        "id" : "1237E0EC-B89C-41AB-AA93-962C30BE5919",
+        "subtitle" : "penguins.csv",
+        "title" : "Training Data Added"
+      }
+    ],
+    "experimentCreated",
+    [
+      {
+        "createdDate" : "2025-07-09T12:18:21Z",
+        "event" : "experimentCreated",
+        "id" : "98E871C6-2D01-4D4B-B601-45E75B917CD4",
+        "subtitle" : "PenguinWeightRegressor 1",
+        "title" : "Model Source Created"
+      }
+    ],
+    "trainingFinished",
+    [
+      {
+        "createdDate" : "2025-07-09T12:21:04Z",
+        "event" : "trainingFinished",
+        "id" : "898007D6-0BC5-45FE-AE09-0CF216C1BB41",
+        "subtitle" : "PenguinWeightRegressor 1",
+        "title" : "Training Completed"
+      }
+    ]
+  ],
+  "contentDataResult" : {
+    "createdDate" : "2025-07-09T12:20:11Z"
+  },
+  "createdDate" : "2025-07-09T12:18:21Z",
+  "evaluationContainerEntity" : {
+    "createdDate" : "2025-07-09T12:21:04Z",
+    "evaluationEntities" : [
+      {
+        "analysedDataType" : "none",
+        "createdDate" : "2025-07-09T12:21:04Z",
+        "dataResult" : {
+
+        },
+        "id" : "b03d9f9f-1fd8-443d-96ab-0d111e01ad56"
+      }
+    ],
+    "id" : "28b0c8e1-6d93-417c-9e2b-9b8b3891dc45",
+    "modifiedDate" : "2025-07-09T12:21:04Z",
+    "previewType" : "tabularRegressor",
+    "testingEvaluationEntity" : {
+      "analysedDataType" : "none",
+      "createdDate" : "2025-07-09T12:18:21Z",
+      "dataResult" : {
+        "createdDate" : "2025-07-09T12:20:11Z"
+      },
+      "id" : "93215e4a-975b-4f79-a605-0df6e285a24f"
+    },
+    "trainingEvaluationEntity" : {
+      "analysedDataType" : "none",
+      "createdDate" : "2025-07-09T12:18:21Z",
+      "dataResult" : {
+        "createdDate" : "2025-07-09T12:20:11Z",
+        "dataAnalysis" : {
+          "classifierAnalysis" : {
+
+          },
+          "issues" : [
+            {
+              "description" : "Data has 12 rows",
+              "severity" : "info"
+            }
+          ],
+          "objectDetectorAnalysis" : {
+            "details" : {
+
+            }
+          },
+          "regressorAnalysis" : {
+            "targetRange" : [
+              3.7,
+              6.2
+            ]
+          },
+          "summary" : {
+            "canUseValidation" : 0,
+            "sampleCount" : 12
+          }
+        },
+        "dataSourceID" : "822DB53B-FC25-43A2-B3E1-413B0C364307",
+        "dataURL" : "file:///Users/michaelattal/Developments/ESGI/Charts3D/ML/penguins.csv",
+        "itemsCount" : 12,
+        "targetRange" : [
+          3.7,
+          6.2
+        ]
+      },
+      "dataSourceID" : "822DB53B-FC25-43A2-B3E1-413B0C364307",
+      "evaluationResult" : {
+        "generalRegressor" : {
+          "maximumError" : 0.13347155003250766,
+          "rootMeanSquaredError" : 0.054806093771545064
+        }
+      },
+      "id" : "5ed9f402-5db9-4349-8d20-acaabc06c6a6"
+    },
+    "validationEvaluationEntity" : {
+      "analysedDataType" : "auto",
+      "createdDate" : "2025-07-09T12:18:21Z",
+      "dataResult" : {
+        "createdDate" : "2025-07-09T12:20:11Z"
+      },
+      "evaluationResult" : {
+        "generalRegressor" : {
+          "maximumError" : 0.024978855810570355,
+          "rootMeanSquaredError" : 0.024978855810570355
+        }
+      },
+      "id" : "c30bc03e-90d4-4033-b18a-be23abb91bf5"
+    }
+  },
+  "evaluationEntity" : {
+    "analysedDataType" : "none",
+    "dataResult" : {
+
+    },
+    "id" : "b4ff7d36-e81b-4ae9-a6f9-bfad3d763d5f"
+  },
+  "evaluationState" : "uninitialized",
+  "id" : "9E266DA8-732F-417A-A860-6974EFE217AF",
+  "modelEntity" : {
+    "createdDate" : "2025-07-09T12:18:21Z",
+    "experimentID" : "9E266DA8-732F-417A-A860-6974EFE217AF",
+    "id" : "8C43A19E-B3AE-4D07-B089-88648D85FCE4",
+    "modelURL" : "Models/PenguinWeightRegressor%201.mlmodel",
+    "modifiedDate" : "2025-07-09T12:18:21Z",
+    "preferredFilename" : "",
+    "title" : "",
+    "version" : "1.0"
+  },
+  "modifiedDate" : "2025-07-09T12:21:04Z",
+  "preferredFilename" : "PenguinWeightRegressor 1",
+  "settingEntity" : {
+    "algorithmType" : "maxEnt",
+    "augmentations" : [
+
+    ],
+    "featureNames" : [
+      "beakLength",
+      "flipperLength"
+    ],
+    "generalRegressorType" : {
+      "auto" : {
+
+      }
+    },
+    "handActionClassifierAugmentations" : [
+
+    ],
+    "handPoseClassifierAugmentations" : [
+
+    ],
+    "harVideoAugmentations" : 0,
+    "seedType" : "default",
+    "styleTransferAlgorithmType" : "image",
+    "suggestedColumnTypes" : [
+      "String",
+      "Double",
+      "Int",
+      "Double"
+    ],
+    "suggestedColumnValues" : [
+      "Adelie, Adelie, Adelie, Chinstrap, Chinstrap, Chinstrap, Gentoo, Gentoo, Gentoo, Adelie, Chinstrap, Gentoo",
+      "37,80, 40,10, 36,50, 48,70, 46,20, 50,10, 53,90, 55,30, 52,60, 39,00, 49,30, 50,00",
+      "181, 190, 180, 195, 192, 198, 225, 230, 228, 186, 196, 220",
+      "3,90, 4,20, 3,70, 5,10, 4,80, 5,30, 6,00, 6,20, 5,90, 4,10, 5,20, 5,70"
+    ],
+    "suggestedColumns" : [
+      "species",
+      "beakLength",
+      "flipperLength",
+      "weight"
+    ],
+    "targetColumn" : "weight",
+    "taskType" : "generalRegresor",
+    "transferLearningEmbeddingType" : "dynamic"
+  },
+  "snapshotRole" : {
+    "withoutSnapshots" : 0
+  },
+  "state" : "trained",
+  "title" : "PenguinWeightRegressor 1",
+  "trainingEntity" : {
+    "analysedDataType" : "datasource",
+    "checkpointMetrics" : {
+
+    },
+    "dataResult" : {
+      "columnTypes" : [
+        "String",
+        "Double",
+        "Int",
+        "Double"
+      ],
+      "columnValues" : [
+        "Adelie, Adelie, Adelie, Chinstrap, Chinstrap, Chinstrap, Gentoo, Gentoo, Gentoo, Adelie, Chinstrap, Gentoo",
+        "37,80, 40,10, 36,50, 48,70, 46,20, 50,10, 53,90, 55,30, 52,60, 39,00, 49,30, 50,00",
+        "181, 190, 180, 195, 192, 198, 225, 230, 228, 186, 196, 220",
+        "3,90, 4,20, 3,70, 5,10, 4,80, 5,30, 6,00, 6,20, 5,90, 4,10, 5,20, 5,70"
+      ],
+      "columns" : [
+        "species",
+        "beakLength",
+        "flipperLength",
+        "weight"
+      ],
+      "createdDate" : "2025-07-09T12:20:11Z",
+      "dataAnalysis" : {
+        "classifierAnalysis" : {
+
+        },
+        "issues" : [
+          {
+            "description" : "Data has 12 rows",
+            "severity" : "info"
+          }
+        ],
+        "objectDetectorAnalysis" : {
+          "details" : {
+
+          }
+        },
+        "regressorAnalysis" : {
+          "targetRange" : [
+            3.7,
+            6.2
+          ]
+        },
+        "summary" : {
+          "canUseValidation" : 0,
+          "sampleCount" : 12
+        }
+      },
+      "dataSourceID" : "822DB53B-FC25-43A2-B3E1-413B0C364307",
+      "dataURL" : "file:///Users/michaelattal/Developments/ESGI/Charts3D/ML/penguins.csv",
+      "itemsCount" : 12,
+      "targetRange" : [
+        3.7,
+        6.2
+      ]
+    },
+    "dataSourceID" : "822DB53B-FC25-43A2-B3E1-413B0C364307",
+    "featureExtractionCheckpointMayBeAvailable" : false,
+    "finishTime" : "2025-07-09T12:21:04Z",
+    "progress" : [
+
+    ],
+    "snapshottableCheckpoints" : {
+
+    },
+    "startTime" : "2025-07-09T12:21:04Z",
+    "trainingAccuracy" : 0.054806093771545064,
+    "trainingResults" : {
+      "generalRegressor" : {
+        "maximumError" : 0.13347155003250766,
+        "rootMeanSquaredError" : 0.054806093771545064
+      }
+    },
+    "validationAccuracy" : 0.024978855810570355,
+    "validationResults" : {
+      "generalRegressor" : {
+        "maximumError" : 0.024978855810570355,
+        "rootMeanSquaredError" : 0.024978855810570355
+      }
+    }
+  },
+  "validationEntity" : {
+    "analysedDataType" : "auto",
+    "dataResult" : {
+      "createdDate" : "2025-07-09T12:20:11Z"
+    },
+    "splitOptions" : {
+      "strategy" : {
+        "automatic" : {
+
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

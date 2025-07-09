@@ -1,0 +1,41 @@
+{
+  "activityEntities" : [
+    "dataSourceTrainingStarted",
+    [
+      {
+        "createdDate" : "2025-07-09T12:21:04Z",
+        "event" : "dataSourceTrainingStarted",
+        "id" : "7B245E7F-A1FB-4EB5-905B-03BD143AB896",
+        "subtitle" : "PenguinWeightRegressor 1",
+        "title" : "Used By"
+      }
+    ],
+    "dataSourceMetrics",
+    [
+      {
+        "createdDate" : "2025-07-09T12:21:04Z",
+        "event" : "dataSourceMetrics",
+        "id" : "C37FC179-3CE1-4689-A0B6-5343D320C38C",
+        "subtitle" : "12 Items",
+        "title" : "Data Summary"
+      }
+    ]
+  ],
+  "createdDate" : "2025-07-09T12:20:11Z",
+  "dataPathRelativeToProjectURL" : "../penguins.csv/",
+  "dataResult" : {
+    "createdDate" : "2025-07-09T12:20:11Z",
+    "dataSourceID" : "822DB53B-FC25-43A2-B3E1-413B0C364307",
+    "dataURL" : "file:///Users/michaelattal/Developments/ESGI/Charts3D/ML/penguins.csv"
+  },
+  "dataURL" : "file:///Users/michaelattal/Developments/ESGI/Charts3D/ML/penguins.csv",
+  "experimentIDs" : [
+    "9E266DA8-732F-417A-A860-6974EFE217AF"
+  ],
+  "id" : "822DB53B-FC25-43A2-B3E1-413B0C364307",
+  "modifiedDate" : "2025-07-09T12:21:04Z",
+  "pathType" : 0,
+  "preferredFilename" : "penguins.csv",
+  "title" : "penguins.csv",
+  "version" : "1.0"
+}

@@ -1,0 +1,29 @@
+{
+  "activityEntities" : [
+    "projectCreated",
+    [
+      {
+        "createdDate" : "2025-07-09T12:18:20Z",
+        "event" : "projectCreated",
+        "id" : "2DB4A47D-ABA3-4321-8C58-D3F6DCC2C908",
+        "subtitle" : "PenguinWeightRegressor",
+        "title" : "Project Created"
+      }
+    ]
+  ],
+  "authorName" : "Michaël ATTAL",
+  "createdDate" : "2025-07-09T12:18:20Z",
+  "description" : "This model predicts the weight of penguins based on flipper length and beak length using tabular regression. The dataset includes three penguin species (Adelie, Chinstrap, Gentoo) with measured physical features.",
+  "id" : "30797AB7-EEB4-4E1A-87D5-804239AAD253",
+  "license" : "",
+  "location" : "",
+  "modifiedDate" : "2025-07-09T12:18:20Z",
+  "projectName" : "PenguinWeightRegressor",
+  "settingsEntity" : {
+    "snapshotOnExtendTraining" : true,
+    "snapshotOnResumeTraining" : false
+  },
+  "taskType" : "generalRegresor",
+  "title" : "Tabular Regression",
+  "version" : "1.1"
+}
