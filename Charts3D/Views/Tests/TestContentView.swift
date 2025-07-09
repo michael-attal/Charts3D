@@ -25,7 +25,7 @@ struct TestContentView: View {
                 rootView: TestSurfacePlot3DChart()
             )
             let test = Entity(components: attachment)
-            
+
             content.add(test)
 
         } placeholder: {

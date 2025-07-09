@@ -22,7 +22,7 @@ struct PenguinWeightPredictor {
 
     func predictWeight(flipperLength: Double, beakLength: Double) -> Double {
         return 1.0
-        
+
         let input = PenguinWeightRegressorInput(
             beakLength: beakLength,
             flipperLength: Int64(flipperLength),

@@ -46,8 +46,8 @@ struct TestSurfacePlot3DChart: View {
 }
 
 #if os(visionOS)
-#Preview(windowStyle: .plain) {
-    TestSurfacePlot3DChart()
-        .environment(AppModel())
-}
+    #Preview(windowStyle: .plain) {
+        TestSurfacePlot3DChart()
+            .environment(AppModel())
+    }
 #endif

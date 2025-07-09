@@ -11,40 +11,50 @@ import SwiftUI
 struct Charts3DApp: App {
     @State private var appModel = AppModel()
 
+    init() {
+        appModel.games = AppModel.loadDataset(filename: "Dataset", prefix: 50)
+        appModel.stats = SteamChartsDataProcessor.aggregateByYearAndGenre(games: appModel.games)
+        appModel.allGenres = SteamChartsDataProcessor.allGenres(from: appModel.stats)
+        appModel.allYears = Array(Set(appModel.games.map(\.releaseYear))).sorted()
+    }
+
     var body: some Scene {
         WindowGroup(id: appModel.SteamCharts3DWindowID) {
-            SteamCharts3D()
+            SteamCharts3D(games: appModel.games, allYears: appModel.allYears)
                 .environment(appModel)
         }
+        .windowResizability(.contentSize)
         #if os(visionOS)
-        .windowStyle(.plain)
+            .windowStyle(.plain)
         #endif
 
         WindowGroup(id: appModel.SteamCharts2DWindowID) {
             SteamCharts2D()
                 .environment(appModel)
         }
-        .defaultWindowPlacement { _, context in
-            if let main = context.windows.first(where: { $0.id == appModel.SteamCharts3DWindowID }) {
-                WindowPlacement(.trailing(main))
-            } else {
-                WindowPlacement()
-            }
-        }
         .windowResizability(.contentSize)
+        #if os(visionOS)
+            .defaultWindowPlacement { _, context in
+                if let main = context.windows.first(where: { $0.id == appModel.SteamCharts3DWindowID }) {
+                    WindowPlacement(.trailing(main))
+                } else {
+                    WindowPlacement()
+                }
+            }
+        #endif
 
         #if os(visionOS)
-        ImmersiveSpace(id: appModel.immersiveSpaceID) {
-            ImmersiveView()
-                .environment(appModel)
-                .onAppear {
-                    appModel.immersiveSpaceState = .open
-                }
-                .onDisappear {
-                    appModel.immersiveSpaceState = .closed
-                }
-        }
-        .immersionStyle(selection: .constant(.mixed), in: .mixed)
+            ImmersiveSpace(id: appModel.immersiveSpaceID) {
+                ImmersiveView()
+                    .environment(appModel)
+                    .onAppear {
+                        appModel.immersiveSpaceState = .open
+                    }
+                    .onDisappear {
+                        appModel.immersiveSpaceState = .closed
+                    }
+            }
+            .immersionStyle(selection: .constant(.mixed), in: .mixed)
         #endif
     }
 }

@@ -1,0 +1,321 @@
+[
+  {
+    "genres": [],
+    "supportedPlatforms": ["windows", "mac", "linux"],
+    "positiveReview": 2,
+    "releaseDate": "Dec 17, 2020",
+    "publishers": ["CAPCOM CO., LTD."],
+    "id": 1484420,
+    "categories": ["Additional High-Quality Audio"],
+    "languages": [],
+    "positiveRatioReview": 50,
+    "negativeReview": 2,
+    "name": "Mega Man 8 Sound Collection",
+    "priceOverview": {
+      "finalPriceInCents": 799,
+      "initialPriceInCents": 799,
+      "currency": "USD",
+      "discountPercent": 0
+    },
+    "isFree": false,
+    "developers": ["CAPCOM CO., LTD."],
+    "tags": {},
+    "hasEarlyAccess": false,
+    "pcRequirements": {
+      "minimum": {
+        "storage": "247 MB available space",
+        "others": [
+          "Storage (high-quality audio): Additional 302 MB available space",
+          "Additional Notes: MP3 (V0) + AAC (VBR) / FLAC (16-bit)"
+        ]
+      }
+    }
+  },
+  {
+    "pcRequirements": {
+      "recommended": {
+        "os": "OS *: Windows 7 and later",
+        "processor": "Intel Core i5 8400 or AMD Ryzen 5 2600",
+        "storage": "1 GB available space",
+        "others": [],
+        "memory": "6 GB RAM",
+        "graphics": "GeForce GTX 960 or Radeon HD 7950"
+      },
+      "minimum": {
+        "processor": "Intel Core i3 4170 or AMD FX-8120",
+        "memory": "4 GB RAM",
+        "graphics": "GeForce GTX 460 or Radeon HD 5850",
+        "os": "OS *: Windows 7",
+        "others": [],
+        "storage": "1 GB available space"
+      }
+    },
+    "ccu": 2,
+    "tags": {
+      "Adventure": 80,
+      "Indie": 81,
+      "Anime": 12,
+      "Sexual Content": 34,
+      "Action": 81,
+      "Memes": 11,
+      "Violent": 31
+    },
+    "id": 1270930,
+    "positiveReview": 125,
+    "releaseDate": "May 14, 2020",
+    "isFree": false,
+    "publishers": ["Axyos Games"],
+    "supportedPlatforms": ["windows"],
+    "categories": [
+      "Single-player",
+      "Steam Achievements",
+      "Steam Trading Cards",
+      "Partial Controller Support",
+      "Steam Cloud",
+      "Family Sharing"
+    ],
+    "genres": ["Action", "Adventure", "Casual", "Indie"],
+    "priceOverview": {
+      "currency": "USD",
+      "initialPriceInCents": 299,
+      "finalPriceInCents": 59,
+      "discountPercent": 80
+    },
+    "owners": "0 .. 20,000",
+    "developers": ["Axyos Games"],
+    "hasEarlyAccess": false,
+    "negativeReview": 18,
+    "languages": ["English", "Russian"],
+    "positiveRatioReview": 87,
+    "name": "Hentai vs Virus: I Am Waifu"
+  },
+  {
+    "priceOverview": {
+      "currency": "USD",
+      "discountPercent": 0,
+      "initialPriceInCents": 999,
+      "finalPriceInCents": 999
+    },
+    "hasEarlyAccess": true,
+    "ccu": 0,
+    "positiveRatioReview": 25,
+    "supportedPlatforms": ["windows"],
+    "name": "Star Phoenix",
+    "owners": "0 .. 20,000",
+    "tags": {
+      "RPG": 21,
+      "Indie": 21,
+      "Action": 24,
+      "Gore": 23,
+      "VR": 11,
+      "Early Access": 25
+    },
+    "publishers": ["Blazar Games"],
+    "developers": ["Blazar Games"],
+    "positiveReview": 2,
+    "id": 556770,
+    "genres": ["Gore", "Action", "Indie", "RPG", "Early Access"],
+    "isFree": false,
+    "releaseDate": "Nov 24, 2016",
+    "negativeReview": 6,
+    "categories": [
+      "Single-player",
+      "Tracked Controller Support",
+      "VR Only",
+      "Steam Trading Cards",
+      "Steam Cloud",
+      "Family Sharing"
+    ],
+    "pcRequirements": {
+      "minimum": {
+        "os": "OS *: Windows 7 SP1",
+        "graphics": "GeForce GTX 970 or AMD Radeon R9 290",
+        "memory": "4 GB RAM",
+        "processor": "Intel Core i5 4590 or AMD FX 8350",
+        "storage": "1 GB available space",
+        "others": [
+          "VR Support: SteamVR or Oculus PC. Standing or Room Scale"
+        ]
+      }
+    },
+    "languages": ["English"]
+  },
+  {
+    "priceOverview": {
+      "finalPriceInCents": 1999,
+      "discountPercent": 0,
+      "initialPriceInCents": 1999,
+      "currency": "USD"
+    },
+    "positiveReview": 10,
+    "negativeReview": 0,
+    "isFree": false,
+    "supportedPlatforms": ["windows", "mac", "linux"],
+    "pcRequirements": {
+      "minimum": {
+        "graphics": "Geforce GTX 770 4GB",
+        "others": ["Requires a 64-bit processor and operating system"],
+        "storage": "3 GB available space",
+        "os": "Windows 10, 64-bit",
+        "memory": "8 GB RAM",
+        "processor": "Intel i7-4771 CPU @ 3.50 Ghz"
+      },
+      "recommended": {
+        "others": ["Requires a 64-bit processor and operating system"]
+      }
+    },
+    "publishers": ["Spike Chunsoft Co., Ltd."],
+    "linuxRequirements": {
+      "recommended": {"others": ["<ul class=\"bb_ul\"><\/ul>"]},
+      "minimum": {"others": ["<ul class=\"bb_ul\"><\/ul>"]}
+    },
+    "languages": [
+      "English",
+      "French",
+      "Italian",
+      "German",
+      "Spanish - Spain",
+      "Japanese",
+      "Korean",
+      "Polish",
+      "Portuguese - Brazil",
+      "Russian",
+      "Simplified Chinese",
+      "Spanish - Latin America",
+      "Traditional Chinese"
+    ],
+    "ccu": 0,
+    "owners": "0 .. 20,000",
+    "hasEarlyAccess": false,
+    "id": 1279310,
+    "developers": ["Implausible Industries"],
+    "genres": ["Action", "Casual", "Strategy"],
+    "name": "RESEARCH and DESTROY",
+    "releaseDate": "Apr 25, 2022",
+    "positiveRatioReview": 100,
+    "categories": [
+      "Single-player",
+      "Multi-player",
+      "Co-op",
+      "Online Co-op",
+      "Shared/Split Screen Co-op",
+      "Shared/Split Screen",
+      "Steam Achievements",
+      "Full controller support",
+      "Family Sharing"
+    ],
+    "tags": {
+      "Co-op": 244,
+      "Character Customization": 205,
+      "Split Screen": 205,
+      "Cartoony": 183,
+      "Arcade": 207,
+      "Supernatural": 166,
+      "Turn-Based Tactics": 226,
+      "Funny": 164,
+      "Turn-Based Strategy": 228,
+      "Sci-fi": 160,
+      "Zombies": 196,
+      "Comic Book": 173,
+      "Colorful": 169,
+      "Shoot 'Em Up": 215,
+      "Team-Based": 156,
+      "Real Time Tactics": 188,
+      "Casual": 232,
+      "Multiplayer": 237,
+      "Action": 235,
+      "Strategy": 253
+    },
+    "macRequirements": {
+      "recommended": {"others": ["<ul class=\"bb_ul\"><\/ul>"]},
+      "minimum": {"others": ["<ul class=\"bb_ul\"><\/ul>"]}
+    }
+  },
+  {
+    "supportedPlatforms": ["windows", "mac", "linux"],
+    "ccu": 1,
+    "owners": "0 .. 20,000",
+    "negativeReview": 7,
+    "hasEarlyAccess": true,
+    "publishers": ["padSoft"],
+    "linuxRequirements": {
+      "recommended": {"others": ["<ul class=\"bb_ul\"><\/ul>"]},
+      "minimum": {"others": ["<ul class=\"bb_ul\"><\/ul>"]}
+    },
+    "id": 1476680,
+    "pcRequirements": {
+      "recommended": {
+        "processor": "3.5 GHz Multi Core",
+        "graphics": "Shader model 5.0 compatible",
+        "directX": "Version 12",
+        "others": ["Requires a 64-bit processor and operating system"],
+        "memory": "16 GB RAM",
+        "os": "Windows 11",
+        "storage": "1 GB available space"
+      },
+      "minimum": {
+        "os": "Windows 10",
+        "graphics": "Shader model 5.0 compatible",
+        "directX": "Version 11",
+        "storage": "500 MB available space",
+        "processor": "2.5 GHz Multi Core",
+        "others": ["Requires a 64-bit processor and operating system"],
+        "memory": "8 GB RAM"
+      }
+    },
+    "developers": ["Pascal Dittrich"],
+    "macRequirements": {
+      "recommended": {"others": ["<ul class=\"bb_ul\"><\/ul>"]},
+      "minimum": {"others": ["<ul class=\"bb_ul\"><\/ul>"]}
+    },
+    "genres": [
+      "Action",
+      "Adventure",
+      "Casual",
+      "Indie",
+      "RPG",
+      "Simulation",
+      "Early Access"
+    ],
+    "isFree": false,
+    "tags": {
+      "Indie": 99,
+      "Early Access": 153,
+      "Agriculture": 114,
+      "Top-Down": 86,
+      "Sandbox": 127,
+      "Farming Sim": 109,
+      "Pixel Graphics": 118,
+      "2D": 92,
+      "Open World": 91,
+      "Building": 96,
+      "Crafting": 104,
+      "Cute": 83,
+      "Adventure": 139,
+      "Character Customization": 130,
+      "Exploration": 133,
+      "Family Friendly": 81,
+      "Female Protagonist": 88,
+      "Relaxing": 98,
+      "Procedural Generation": 80,
+      "Open World Survival Craft": 126
+    },
+    "languages": ["English"],
+    "name": "A World of Little Legends",
+    "positiveRatioReview": 82,
+    "categories": [
+      "Single-player",
+      "Steam Achievements",
+      "Partial Controller Support",
+      "Family Sharing"
+    ],
+    "positiveReview": 31,
+    "releaseDate": "Mar 1, 2022",
+    "priceOverview": {
+      "discountPercent": 0,
+      "currency": "USD",
+      "initialPriceInCents": 1999,
+      "finalPriceInCents": 1999
+    }
+  }
+]
