@@ -12,8 +12,10 @@ struct Charts3DApp: App {
     @State private var appModel = AppModel()
 
     init() {
-        appModel.games = AppModel.loadDataset(filename: "Dataset", prefix: 50)
-        appModel.stats = SteamChartsDataProcessor.aggregateByYearAndGenre(games: appModel.games)
+        // appModel.games = AppModel.loadDataset(filename: "Dataset")
+        // TODO: Create prefix input in UI
+        appModel.games = AppModel.loadDataset(filename: "Dataset", prefix: 100)
+        // appModel.stats = SteamChartsDataProcessor.aggregateByYearAndGenre(games: appModel.games)
         appModel.allGenres = SteamChartsDataProcessor.allGenres(from: appModel.stats)
         appModel.allYears = Array(Set(appModel.games.map(\.releaseYear))).sorted()
     }

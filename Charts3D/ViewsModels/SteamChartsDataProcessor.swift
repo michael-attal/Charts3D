@@ -39,7 +39,7 @@ enum SteamChartsDataProcessor {
                 } else {
                     monthNum = 1 // fallback
                 }
-                let y = yearStr.flatMap { Int($0) } ?? 0
+                let y = yearStr.flatMap { Int($0) } ?? 2020
                 return (y, monthNum)
             }()
 

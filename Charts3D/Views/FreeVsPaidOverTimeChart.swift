@@ -11,49 +11,77 @@ import SwiftUI
 struct FreeVsPaidOverTimeChart: View {
     let games: [SteamGame]
 
-    struct YearCount: Identifiable {
+    struct YearTypeValue: Identifiable {
         let year: Int
-        let free: Int
-        let paid: Int
-        var id: Int { year }
+        let type: String
+        let value: Int
+        var id: String { "\(year)-\(type)" }
     }
 
-    var yearCounts: [YearCount] {
+    var points: [YearTypeValue] {
         let grouped = Dictionary(grouping: games, by: { $0.releaseYear })
-        return grouped.map { year, gamesInYear in
-            let free = gamesInYear.filter { $0.isFree ?? false }.count
-            let paid = gamesInYear.filter { !($0.isFree ?? false) }.count
-            return YearCount(year: year, free: free, paid: paid)
+        let years = grouped.keys.sorted()
+        var all: [YearTypeValue] = []
+        for year in years {
+            let free = grouped[year]?.filter { $0.isFree ?? false }.count ?? 0
+            let paid = grouped[year]?.filter { !($0.isFree ?? false) }.count ?? 0
+            all.append(.init(year: year, type: "Free-to-Play", value: free))
+            all.append(.init(year: year, type: "Payant", value: paid))
         }
-        .sorted(by: { $0.year < $1.year })
+        return all
     }
 
     var body: some View {
-        let minYear = max(1980, yearCounts.map(\.year).min() ?? 1980)
-        let maxYear = yearCounts.map(\.year).max() ?? 2025
+        let minYear = points.map(\.year).min()!
+        let maxYear = points.map(\.year).max()!
 
-        Chart {
-            ForEach(yearCounts) { yc in
-                LineMark(
-                    x: .value("Année", yc.year),
-                    y: .value("Free-to-Play", yc.free),
-                    series: .value("Type", "Free-to-Play")
-                )
-                .foregroundStyle(.green)
-                .interpolationMethod(.catmullRom)
-                LineMark(
-                    x: .value("Année", yc.year),
-                    y: .value("Payant", yc.paid),
-                    series: .value("Type", "Payant")
-                )
-                .foregroundStyle(.blue)
-                .interpolationMethod(.catmullRom)
-            }
+        Chart(points) { point in
+            LineMark(
+                x: .value("Year", point.year),
+                y: .value("Count", point.value),
+                series: .value("Type", point.type)
+            )
+            .interpolationMethod(.catmullRom)
+            .foregroundStyle(by: .value("Type", point.type))
         }
         .chartXAxisLabel("Année de sortie")
         .chartYAxisLabel("Nombre de jeux")
         .chartXScale(domain: minYear ... maxYear)
+        .chartXAxis {
+            AxisMarks(values: .stride(by: 1)) { value in
+                AxisGridLine()
+                AxisTick()
+                AxisValueLabel()
+            }
+        }
         .padding()
-        .chartLegend(position: .bottom)
+        // .overlay(alignment: .bottomTrailing) {
+        //     HStack(spacing: 12) {
+        //         LegendItem(color: .green, text: "Free-to-Play")
+        //         LegendItem(color: .blue, text: "Payant")
+        //     }
+        //     .padding(10)
+        //     .background(.ultraThinMaterial)
+        //     .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+        //     .shadow(radius: 6)
+        //     .padding(16)
+        // }
+    }
+}
+
+// Custom legend item view
+struct LegendItem: View {
+    let color: Color
+    let text: String
+
+    var body: some View {
+        HStack(spacing: 6) {
+            Circle()
+                .fill(color)
+                .frame(width: 14, height: 14)
+            Text(text)
+                .font(.caption)
+                .foregroundColor(.primary)
+        }
     }
 }

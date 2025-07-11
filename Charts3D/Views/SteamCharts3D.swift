@@ -11,10 +11,17 @@ import SwiftUI
 // TODO: Replace category/tags id and month by first 3 characters and replace year id by full year
 
 /// Supported platforms (Windows, Mac, Linux)
-let allPlatforms: [String] = ["windows", "mac", "linux"]
+let allPlatforms: [String] = ["space", "windows", "space2", "mac", "space3", "linux", "space4"]
+
+struct PlatformStats: Identifiable {
+    var id: String { "\(platform)-\(year)-\(nbGames)" }
+    var platform: String
+    var year: Int
+    var nbGames: Int
+}
 
 enum SurfaceMode: String, CaseIterable, Identifiable {
-    case square = "Carré"
+    case square = "Cubique"
     case wave = "Vague"
     case smoothWaves = "Vagues arrondies"
 
@@ -35,13 +42,19 @@ enum Chart3DAggregation: String, CaseIterable, Identifiable {
 struct SteamCharts3D: View {
     @Environment(AppModel.self) private var appModel
 
-    #if os(visionOS)
     @Environment(\.openWindow) private var openWindow
     @Environment(\.dismissWindow) private var dismissWindow
-    #endif
 
     let games: [SteamGame]
-    let allYears: [Int] // Years present in the dataset, sorted
+    var allYears: [Int] = [] // Years present in the dataset, sorted
+    var formattedYears: [Int] {
+        var formattedYears = allYears
+        if formattedYears.count > 0 {
+            formattedYears.insert(formattedYears.first! - 1, at: 0)
+            formattedYears.append(formattedYears.last! + 1)
+        }
+        return formattedYears
+    }
 
     #if os(visionOS)
     @State private var pose: Chart3DPose = .init(
@@ -54,6 +67,7 @@ struct SteamCharts3D: View {
     #endif
 
     @State private var display2DChart: Bool = false
+    @State private var displayDot: Bool = false
     @State private var selectedYearIdx: Int = 0
     @State private var yearWindow: Int = 1
     @State private var showAll: Bool = true
@@ -63,7 +77,10 @@ struct SteamCharts3D: View {
     private let monthLabels = ["Jan", "Fév", "Mar", "Avr", "Mai", "Juin", "Juil", "Août", "Sep", "Oct", "Nov", "Déc"]
 
     private var allGenres: [String] {
-        Array(Set(games.flatMap { $0.genres })).sorted()
+        var genres = Array(Set(games.flatMap { $0.genres })).sorted()
+        genres.insert("empty_space_start", at: 0)
+        genres.append("empty_space_end")
+        return genres
     }
 
     // MARK: Data helpers (by aggregation mode)
@@ -88,18 +105,18 @@ struct SteamCharts3D: View {
         guard platformIdx >= 0, platformIdx < allPlatforms.count else { return .nan }
         if isZoomOnYear {
             let monthIdx = Int(round(z))
-            guard monthIdx >= 0, monthIdx < 12 else { return .nan }
+            guard monthIdx >= 1, monthIdx <= 12 else { return 0 }
             let selectedYear = allYears[safe: selectedYearIdx] ?? allYears.first ?? 0
             let platform = allPlatforms[platformIdx]
             return Double(games.filter {
                 $0.releaseYear == selectedYear &&
-                    $0.releaseMonth == monthIdx + 1 &&
+                    $0.releaseMonth == monthIdx &&
                     $0.platforms.contains(platform)
             }.count)
         } else {
             let yearIdx = Int(round(z))
-            guard yearIdx >= 0, yearIdx < allYears.count else { return .nan }
-            let year = allYears[yearIdx]
+            guard yearIdx >= 0, yearIdx < formattedYears.count else { return .nan }
+            let year = formattedYears[yearIdx]
             let platform = allPlatforms[platformIdx]
             return Double(games.filter {
                 $0.releaseYear == year &&
@@ -113,8 +130,8 @@ struct SteamCharts3D: View {
         let genreIdx = Int(round(x))
         guard genreIdx >= 0, genreIdx < allGenres.count else { return .nan }
         let yearIdx = Int(round(z))
-        guard yearIdx >= 0, yearIdx < allYears.count else { return .nan }
-        let year = allYears[yearIdx]
+        guard yearIdx >= 0, yearIdx < formattedYears.count else { return .nan }
+        let year = formattedYears[yearIdx]
         let genre = allGenres[genreIdx]
         return Double(games.filter { $0.releaseYear == year && $0.genres.contains(genre) }.count)
     }
@@ -124,8 +141,8 @@ struct SteamCharts3D: View {
         let genreIdx = Int(round(x))
         guard genreIdx >= 0, genreIdx < allGenres.count else { return .nan }
         let yearIdx = Int(round(z))
-        guard yearIdx >= 0, yearIdx < allYears.count else { return .nan }
-        let year = allYears[yearIdx]
+        guard yearIdx >= 0, yearIdx < formattedYears.count else { return .nan }
+        let year = formattedYears[yearIdx]
         let genre = allGenres[genreIdx]
         let filtered = games.filter { $0.releaseYear == year && $0.genres.contains(genre) && $0.positiveRatioReview > 0 }
         guard !filtered.isEmpty else { return .nan }
@@ -137,8 +154,8 @@ struct SteamCharts3D: View {
         let genreIdx = Int(round(x))
         guard genreIdx >= 0, genreIdx < allGenres.count else { return .nan }
         let yearIdx = Int(round(z))
-        guard yearIdx >= 0, yearIdx < allYears.count else { return .nan }
-        let year = allYears[yearIdx]
+        guard yearIdx >= 0, yearIdx < formattedYears.count else { return .nan }
+        let year = formattedYears[yearIdx]
         let genre = allGenres[genreIdx]
         let filtered = games.filter {
             $0.releaseYear == year &&
@@ -153,9 +170,9 @@ struct SteamCharts3D: View {
     private var zRange: ClosedRange<Double> {
         switch aggregation {
             case .platformYear:
-                return isZoomOnYear ? 0...11 : 0...Double(max(allYears.count - 1, 1))
+                return isZoomOnYear ? 0...13 : 0...Double(max(formattedYears.count - 1, 1))
             default:
-                return 0...Double(max(allYears.count - 1, 1))
+                return 0...Double(max(formattedYears.count - 1, 1))
         }
     }
 
@@ -185,7 +202,7 @@ struct SteamCharts3D: View {
                 } else {
                     return Double(
                         allPlatforms.flatMap { platform in
-                            allYears.map { year in
+                            formattedYears.map { year in
                                 games.filter { $0.releaseYear == year && $0.platforms.contains(platform) }.count
                             }
                         }.max() ?? 1
@@ -194,7 +211,7 @@ struct SteamCharts3D: View {
             case .countByGenreYear:
                 return Double(
                     allGenres.flatMap { genre in
-                        allYears.map { year in
+                        formattedYears.map { year in
                             games.filter { $0.releaseYear == year && $0.genres.contains(genre) }.count
                         }
                     }.max() ?? 1
@@ -204,7 +221,7 @@ struct SteamCharts3D: View {
             case .avgPriceByGenreYear:
                 var maxAvg: Double = 0
                 for genre in allGenres {
-                    for year in allYears {
+                    for year in formattedYears {
                         let filtered = games.filter { $0.releaseYear == year && $0.genres.contains(genre) && $0.priceUSD != nil }
                         guard !filtered.isEmpty else { continue }
                         let avg = filtered.map { $0.priceUSD! }.reduce(0, +) / Double(filtered.count)
@@ -215,18 +232,61 @@ struct SteamCharts3D: View {
         }
     }
 
+    func getValueLabelX(from: AxisValue) -> String {
+        if aggregation == .platformYear {
+        } else if aggregation == .countByGenreYear {}
+
+        return "Test"
+    }
+
     /// Helper: are we in zoom on one year/month (only platformYear supports months)
     private var isZoomOnYear: Bool { aggregation == .platformYear && !showAll }
+
+    func getPlatformStats() -> [PlatformStats] {
+        var stats: [PlatformStats] = []
+
+        for game in games {
+            for platform in game.platforms {
+                if let existantPlatform = stats.first(where: { $0.platform == platform }) {
+                    if var existantYearID = stats.firstIndex(where: { $0.year == game.releaseYear && $0.platform == platform }) {
+                        stats[existantYearID].nbGames += 1
+                    } else {
+                        stats.append(PlatformStats(platform: platform, year: game.releaseYear, nbGames: 1))
+                    }
+                } else {
+                    stats.append(PlatformStats(platform: platform, year: game.releaseYear, nbGames: 1))
+                }
+            }
+        }
+
+        print(stats)
+        return stats
+    }
 
     var body: some View {
         VStack {
             #if !os(visionOS)
             analyseTypePicker
-            surfaceModePicker.padding(.bottom, 20)
+            surfaceModePicker
+            toogleChart2DButton
             #endif
 
             Chart3D {
-                SurfacePlot(x: aggregation == .platformYear ? "Platform" : "Genre", y: "Value", z: "Year") { x, z in
+                if displayDot {
+                    ForEach(getPlatformStats()) { stats in
+                        if let yearIdx = formattedYears.firstIndex(of: stats.year),
+                           let platformIdx = allPlatforms.firstIndex(of: stats.platform)
+                        {
+                            PointMark(
+                                x: .value(xAxisLabel(), Double(platformIdx)),
+                                y: .value(yAxisLabel(), stats.nbGames),
+                                z: .value(zAxisLabel(), Double(yearIdx))
+                            )
+                        }
+                    }
+                }
+
+                SurfacePlot(x: xAxisLabel(), y: yAxisLabel(), z: zAxisLabel()) { x, z in
                     let yVal: Double
                     switch surfaceMode {
                         case .square:
@@ -246,19 +306,49 @@ struct SteamCharts3D: View {
             .chartYAxisLabel(yAxisLabel())
             .chartZAxisLabel(zAxisLabel())
             .chartXScale(domain: xRange, range: -0.5...0.5)
-            .chartYScale(domain: 0...yMax, range: -0.23...1)
+            .chartYScale(domain: 0...yMax, range: -0.5...0.5)
             .chartZScale(domain: zRange, range: -0.5...0.5)
+            .chartXAxis {
+                AxisMarks(values: .stride(by: 1)) { value in
+                    AxisGridLine()
+                    AxisTick()
+                    AxisValueLabel()
+                    // AxisValueLabel( {
+                    //     if let intValue = value.as(Int.self), intValue >= 0, intValue < allPlatforms.count {
+                    //         Text("\(String((allPlatforms[intValue].capitalized).prefix(3)))")
+                    //     }
+                    // })
+                }
+            }
+            .chartZAxis {
+                // AxisMarks(values: .stride(by: allYears.count > 10 ? 2 : 1)) { value in
+                AxisMarks(values: .stride(by: 1)) { value in
+                    AxisGridLine()
+                    AxisTick()
+                    AxisValueLabel()
+                    // AxisValueLabel( {
+                    //     if let intValue = value.as(Int.self), intValue >= 0, intValue < formattedYears.count {
+                    //         Text("\(formattedYears[intValue])")
+                    //     }
+                    // })
+                }
+            }
             .overlay(
                 axesLegendView(),
                 alignment: .bottomTrailing
             )
+            #if !os(visionOS)
             .overlay(
                 zAxisLegendView(),
                 alignment: .bottomLeading
             )
-            #if !os(visionOS)
-            .frame(height: 600)
-            .padding(.top, 50)
+            #endif
+            #if os(visionOS)
+            .overlay(
+                zAxisLegendView(),
+                alignment: .topLeading
+            )
+            .padding(.bottom, 50)
             #endif
             #if !os(visionOS)
             // Controls
@@ -279,7 +369,6 @@ struct SteamCharts3D: View {
         #endif
     }
 
-    #if os(visionOS)
     var toogleChart2DButton: some View {
         Button {
             display2DChart.toggle()
@@ -292,7 +381,6 @@ struct SteamCharts3D: View {
             Text(display2DChart ? "Cacher plus" : "Voir plus")
         }
     }
-    #endif
 
     var analyseTypePicker: some View {
         HStack {
@@ -361,7 +449,7 @@ struct SteamCharts3D: View {
     /// Smoothing on X and Z axes (platform/genre + année)
     private func smoothingXZ(x: Double, z: Double, windowX: Double, windowZ: Double) -> Double {
         let countX = aggregation == .platformYear ? allPlatforms.count : allGenres.count
-        let countZ = allYears.count
+        let countZ = formattedYears.count
         var sum: Double = 0
         var weight: Double = 0
         for i in 0..<countX {
@@ -413,37 +501,44 @@ struct SteamCharts3D: View {
     private func axesLegendView() -> some View {
         VStack(alignment: .trailing, spacing: 8) {
             HStack(spacing: 8) {
-                Capsule().frame(width: 16, height: 4).foregroundStyle(.blue)
-                Text("X : \(aggregation == .platformYear ? "Plateforme" : "Genre")").font(.caption)
+                Text("Axe X : \(aggregation == .platformYear ? "Plateforme" : "Genre")")
+                #if !os(visionOS)
+                    .font(.caption)
+                #endif
                 if aggregation == .platformYear {
-                    Text("0=Windows, 1=Mac, 2=Linux").font(.caption2).foregroundStyle(.secondary)
+                    Text("1=Windows, 3=Mac, 5=Linux")
+                    #if !os(visionOS)
+                        .font(.caption2)
+                    #endif
+                } else if aggregation == .countByGenreYear {
+                    Text("Liste : \(Array(Set(games.flatMap { $0.genres })).sorted())   Total \(allGenres.count)")
+                        .font(.caption2)
                 }
             }
             HStack(spacing: 8) {
-                Capsule().frame(width: 16, height: 4).foregroundStyle(.green)
-                Text(yAxisLabel()).font(.caption)
+                Text("Axe Y : \(yAxisLabel()) (total \(games.count))")
+                #if !os(visionOS)
+                    .font(.caption)
+                #endif
             }
             HStack(spacing: 8) {
-                Capsule().frame(width: 16, height: 4).foregroundStyle(.purple)
-                Text(zAxisLabel()).font(.caption)
+                Text("Axe Z : \(zAxisLabel())")
+                #if !os(visionOS)
+                    .font(.caption)
+                #endif
                 if aggregation == .platformYear {
                     Text(isZoomOnYear ?
-                        "0=Janvier … 11=Décembre"
-                        : "\(allYears.first ?? 0) → \(allYears.last ?? 0)").font(.caption2).foregroundStyle(.secondary)
+                        "1=Janvier … 12=Décembre"
+                        : "\(allYears.first ?? 0) → \(allYears.last ?? 0) (total \(allYears.count))")
+                    #if !os(visionOS)
+                        .font(.caption2)
+                    #endif
                 } else {
-                    Text("\(allYears.first ?? 0) → \(allYears.last ?? 0)").font(.caption2).foregroundStyle(.secondary)
+                    Text("\(allYears.first ?? 0) → \(allYears.last ?? 0) (total \(allYears.count))")
+                    #if !os(visionOS)
+                        .font(.caption2)
+                    #endif
                 }
-            }
-            if aggregation == .platformYear {
-                VStack(alignment: .trailing, spacing: 2) {
-                    ForEach(allPlatforms.indices, id: \.self) { i in
-                        HStack(spacing: 4) {
-                            Text("\(i):").font(.caption2)
-                            Text(allPlatforms[i].capitalized).font(.caption2)
-                        }
-                    }
-                }
-                .padding(.top, 4)
             }
         }
         .padding(8)
@@ -456,18 +551,17 @@ struct SteamCharts3D: View {
         HStack(spacing: 6) {
             Text(zAxisLabel() + " :")
                 .font(.caption)
-                .foregroundStyle(.secondary)
             if aggregation == .platformYear && isZoomOnYear {
                 ForEach(0..<12, id: \.self) { i in
                     Text(monthLabels[i])
                         .font(.caption2)
-                        .foregroundStyle(i == 0 || i == 11 ? .primary : .secondary)
+                        .foregroundStyle(.primary)
                 }
             } else {
                 ForEach(allYears.indices, id: \.self) { i in
                     Text("\(allYears[i])")
                         .font(.caption2)
-                        .foregroundStyle(i == 0 || i == allYears.count - 1 ? .primary : .secondary)
+                        .foregroundStyle(.primary)
                 }
             }
         }

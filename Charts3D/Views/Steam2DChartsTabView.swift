@@ -13,7 +13,7 @@ struct Steam2DChartsTabView: View {
 
     @State private var selectedGenres: [String] = []
     @State private var selectedChart: Int = 0
-    @State private var recentPeriod: ClosedRange<Int> = 2020...2024
+    @State private var recentPeriod: ClosedRange<Int>?
 
     var allGenres: [String] {
         Array(Set(games.map(\.mainGenre))).sorted()
@@ -27,9 +27,9 @@ struct Steam2DChartsTabView: View {
         VStack {
             Picker("Graphique", selection: $selectedChart) {
                 Text("Sorties par année").tag(0)
-                Text("Évolution score/genre").tag(1)
+                // Text("Évolution score/genre").tag(1)
                 Text("Répartition des genres").tag(2)
-                Text("Boxplot score/genre").tag(3)
+                // Text("Boxplot score/genre").tag(3)
                 Text("Free-to-play vs Payant").tag(4)
             }
             .pickerStyle(SegmentedPickerStyle())
@@ -65,7 +65,7 @@ struct Steam2DChartsTabView: View {
                         selectedGenres: selectedGenres.isEmpty ? Array(allGenres.prefix(3)) : selectedGenres
                     )
                 }
-            } else if selectedChart == 2 {
+            } else if selectedChart == 2, var recentPeriod {
                 VStack {
                     HStack {
                         Text("Période :")
@@ -84,6 +84,11 @@ struct Steam2DChartsTabView: View {
                 ScoreBoxPlotPerGenreChart(games: games, selectedGenres: selectedGenres.isEmpty ? Array(allGenres.prefix(3)) : selectedGenres)
             } else if selectedChart == 4 {
                 FreeVsPaidOverTimeChart(games: games)
+            }
+        }
+        .onAppear {
+            if recentPeriod == nil, let first = allYears.first, let last = allYears.last {
+                recentPeriod = first...last
             }
         }
     }

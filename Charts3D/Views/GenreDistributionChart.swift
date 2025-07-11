@@ -25,6 +25,13 @@ struct GenreDistributionChart: View {
         }
         .chartXAxisLabel("Nombre de jeux sortis")
         .chartYAxisLabel("Genre principal")
+        // .chartXAxis {
+        //     AxisMarks(values: .stride(by: 5)) { value in
+        //         AxisGridLine()
+        //         AxisTick()
+        //         AxisValueLabel()
+        //     }
+        // }
         .padding()
     }
 }

@@ -18,8 +18,8 @@ struct ReleasesPerYearChart: View {
     }
 
     var body: some View {
-        let minYear = max(1980, yearCounts.map(\.year).min() ?? 1980)
-        let maxYear = yearCounts.map(\.year).max() ?? 2025
+        let minYear = yearCounts.map(\.year).min()!
+        let maxYear = yearCounts.map(\.year).max()!
 
         Chart(yearCounts, id: \.year) { item in
             BarMark(
@@ -36,7 +36,14 @@ struct ReleasesPerYearChart: View {
         }
         .chartXAxisLabel("Année de sortie")
         .chartYAxisLabel("Nombre de jeux sortis")
-        .chartXScale(domain: minYear ... maxYear) // Fixe la borne min à 1980
+        .chartXScale(domain: minYear ... maxYear)
+        .chartXAxis {
+            AxisMarks(values: .stride(by: 1)) { value in
+                AxisGridLine()
+                AxisTick()
+                AxisValueLabel()
+            }
+        }
         .padding()
     }
 }
